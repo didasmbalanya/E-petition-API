@@ -1,0 +1,19 @@
+{
+  "name": "e-petition",
+  "version": "1.0.0",
+  "description": "An online platform that allows users to create and participate in petitions. ## Vision The vision of this project is to help the government know it’s citizens concerns faster & easier way without them having to demonstrate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didasmbalanya/E-petition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/didasmbalanya/E-petition/issues"
+  },
+  "homepage": "https://github.com/didasmbalanya/E-petition#readme"
+}
