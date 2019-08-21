@@ -4,6 +4,7 @@
   "description": "An online platform that allows users to create and participate in petitions. ## Vision The vision of this project is to help the government know it’s citizens concerns faster & easier way without them having to demonstrate.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,9 @@
   },
   "homepage": "https://github.com/didasmbalanya/E-petition#readme",
   "dependencies": {
+    "@hapi/joi": "^15.1.1",
     "dotenv": "^8.1.0",
+    "express": "^4.17.1",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.15.1"
@@ -33,6 +36,7 @@
     "babel-loader": "^8.0.6",
     "eslint": "^6.2.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.1"
   }
 }
