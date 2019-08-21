@@ -1,6 +1,5 @@
 export default (sequelize, DataTypes) => {
   const petitions = sequelize.define('petitions', {
-    id: DataTypes.INTEGER,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
@@ -19,6 +18,7 @@ export default (sequelize, DataTypes) => {
     petitions.hasMany(models.votes, {
       onDelete: 'CASCADE',
       foreignKey: 'petition_id',
+      as: 'petition_votes',
     });
   };
   return petitions;
