@@ -1,30 +1,31 @@
+
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('users', {
+  return queryInterface.createTable('petitions', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    email: {
+    title: {
       type: Sequelize.STRING,
     },
-    first_name: {
+    description: {
       type: Sequelize.STRING,
     },
-    last_name: {
-      type: Sequelize.STRING,
+    user_id: {
+      type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'user_id',
+      },
     },
-    phone_number: {
-      type: Sequelize.STRING,
+    votes: {
+      type: Sequelize.INTEGER,
     },
-    address: {
-      type: Sequelize.STRING,
-    },
-    password: {
-      type: Sequelize.STRING,
-    },
-    is_admin: {
+    expired: {
       type: Sequelize.BOOLEAN,
     },
     createdAt: {
@@ -38,6 +39,4 @@ export function up(queryInterface, Sequelize) {
   });
 }
 // eslint-disable-next-line no-unused-vars
-export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable('users');
-}
+export function down(queryInterface, Sequelize) { return queryInterface.dropTable('petitions'); }

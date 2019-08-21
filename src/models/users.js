@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Book = sequelize.define('users', {
+  const users = sequelize.define('users', {
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,11 +28,17 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    created_on: {
-      type: 'TIMESTAMP',
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
-    }
   });
-  return Book;
+  users.associate = (models) => {
+    users.hasMany(models.petitions, {
+      foreignKey: 'user_id',
+    });
+    users.hasMany(models.votes, {
+      foreignKey: 'user_id',
+    });
+    users.hasMany(models.flags, {
+      foreignKey: 'user_id',
+    });
+  };
+  return users;
 };
