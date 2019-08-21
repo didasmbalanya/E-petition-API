@@ -15,5 +15,21 @@
   "bugs": {
     "url": "https://github.com/didasmbalanya/E-petition/issues"
   },
-  "homepage": "https://github.com/didasmbalanya/E-petition#readme"
+  "homepage": "https://github.com/didasmbalanya/E-petition#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.15.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "babel-loader": "^8.0.6"
+  }
 }
