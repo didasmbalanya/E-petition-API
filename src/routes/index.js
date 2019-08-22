@@ -11,9 +11,14 @@ router.route('/').get((req, res) => {
   res.status(200).json({ message: 'welcome to petitioner API' });
 });
 
-router.use('users', UserRoutes);
-router.use('petitions', PetitionRoutes);
-router.use('votes', VoteRoutes);
-router.use('flags', FlagRoutes);
+router.use('/users', UserRoutes);
+router.use('/petitions', PetitionRoutes);
+router.use('/votes', VoteRoutes);
+router.use('/flags', FlagRoutes);
+
+// when a random route is inputed
+router.route('*', (req, res) => {
+  res.status(404).send({error: 'route not found'});
+});
 
 export default router;
