@@ -8,5 +8,6 @@ const { addPetition, deletePetition } = PetitionController;
 
 router.post('/', addPetition);
 router.delete('/:id', auth, deletePetition);
+router.post('/', addPetition);
 
 export default router;
