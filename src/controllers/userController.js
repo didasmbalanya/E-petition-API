@@ -17,10 +17,10 @@ class UserController {
           req.body.password = bcrypt.hashSync(req.body.password, 8);
           const newUser = await userService.addUser(req.body);
           const token = jwt.sign({ email: req.body.email }, secret, { expiresIn: '3h' });
-          res.status(201).send({ data: getPublicProfile(newUser), token });
+          res.status(201).send({ status: 201, data: getPublicProfile(newUser), token });
         }
       } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({ status: 404, error });
       }
     }
   }
