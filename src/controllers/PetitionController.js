@@ -11,6 +11,7 @@ class PetitionController {
     const votes = 0;
     const expired = false;
     const { title, description } = req.body;
+    // eslint-disable-next-line camelcase
     const user_id = 1; // get from the token
     const newPetition = {
       user_id, title, description, votes, expired,

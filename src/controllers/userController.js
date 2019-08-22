@@ -2,9 +2,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import userService from '../services/UserServices';
+import Util from '../utils/Utils';
 import { getPublicProfile } from '../utils/userUtils';
 
 const { secret } = process.env;
+const { signIn } = userService;
 class UserController {
   static async signUp(req, res) {
     const foundUser = await userService.findUserByEmail(req.body.email);
@@ -23,6 +25,23 @@ class UserController {
         res.status(404).send({ status: 404, error });
       }
     }
+  }
+
+  static async signIn(req, res) {
+    const { email, password } = req.body;
+    const response = await signIn(email, password);
+
+    if (response) {
+      const data = {
+        status: 200,
+        token: response.token,
+        data: getPublicProfile(response),
+      };
+
+      return res.status(200).json(data);
+    }
+    Util.setError(404, 'error occured while trying to log you in');
+    return Util.send(res);
   }
 }
 
