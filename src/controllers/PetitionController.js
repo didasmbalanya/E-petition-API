@@ -29,26 +29,26 @@ class PetitionController {
       return util.send(res);
     }
   }
-}
 
-// eslint-disable-next-line consistent-return
-export const deletePetition = async (req, res) => {
-  try {
-    const petition = await db.petitions.findOne({ where: { id: Number(req.params.id) } });
-    if (!petition) { return res.json({ status: 400, message: 'the petition with the given id does not exists' }); }
+  // eslint-disable-next-line consistent-return
+  static async deletePetition(req, res) {
+    try {
+      const petition = await db.petitions.findOne({ where: { id: Number(req.params.id) } });
+      if (!petition) { return res.json({ status: 400, message: 'the petition with the given id does not exists' }); }
 
-    if (req.user.is_admin === true) {
+      if (req.user.is_admin === true) {
+        await db.petitions.destroy({ where: { id: Number(req.params.id) } });
+        return res.json({ status: 200, message: 'petition has been deleted successfully' });
+      }
+
+      if (petition.user_id !== req.user.id) { return res.json({ status: 403, message: 'Access denied, this petition is not yours' }); }
+
       await db.petitions.destroy({ where: { id: Number(req.params.id) } });
-      return res.json({ status: 200, message: 'petition has been deleted successfully' });
+      res.json({ status: 200, message: 'petition has been deleted successfully' });
+    } catch (error) {
+      throw (error);
     }
-
-    if (petition.user_id !== req.user.id) { return res.json({ status: 403, message: 'Access denied, this petition is not yours' }); }
-
-    await db.petitions.destroy({ where: { id: Number(req.params.id) } });
-    res.json({ status: 200, message: 'petition has been deleted successfully' });
-  } catch (error) {
-    throw (error);
   }
-};
+}
 
 export default PetitionController;
