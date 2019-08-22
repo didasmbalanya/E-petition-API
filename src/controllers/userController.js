@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import userService from '../services/UserServices';
+import userService from '../services/userServices';
 import Util from '../utils/Utils';
 import { getPublicProfile } from '../utils/userUtils';
 
