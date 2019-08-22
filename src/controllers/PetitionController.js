@@ -14,7 +14,6 @@ class PetitionController {
         }
         try {
             const createdPetition = await PetitonService.addPetition(newPetition);
-            console.log('-----', createdPetition);
             
             if (createdPetition === 'exists') {
                 util.setError(409, `Petition with the title: '${title}' already exists`);
