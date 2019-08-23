@@ -12,6 +12,9 @@ app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 3000;
 
 app.use('/api/v1/', routes);
+app.get('*', (req, res) => {
+  res.status(404).send({ error: 'route not found' });
+});
 
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`server running on port ${PORT}...`));

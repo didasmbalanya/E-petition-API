@@ -37,6 +37,9 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+#dont index build folder
+build/
+
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -87,3 +90,7 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 .DS_Store
+
+#dont index test coverage folders
+.nyc_output/
+coverage/
