@@ -22,10 +22,8 @@ class voteController {
             }
         // eslint-disable-next-line camelcase
         const { vote } = req.body;
-        // userId get from token
-        const newId = req.params;
         // eslint-disable-next-line camelcase
-        const petition_id = newId.id;
+        const petition_id = req.params.id;
         const newVote = {
             petition_id,
             user_id: req.user.dataValues.id,
