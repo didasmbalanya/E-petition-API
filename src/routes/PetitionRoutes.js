@@ -1,13 +1,14 @@
 import { Router } from 'express';
 import PetitionController from '../controllers/PetitionController';
+// eslint-disable-next-line import/no-named-as-default
 import auth from '../middlewares/user/auth';
+import Validation from '../validation/validation';
 
 const router = new Router();
-
+const { petitionValidator } = Validation;
 const { addPetition, deletePetition } = PetitionController;
 
-router.post('/', addPetition);
 router.delete('/:id', auth, deletePetition);
-router.post('/', addPetition);
+router.post('/', petitionValidator, addPetition);
 
 export default router;

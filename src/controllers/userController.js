@@ -11,7 +11,7 @@ class UserController {
   static async signUp(req, res) {
     const foundUser = await userService.findUserByEmail(req.body.email);
     if (foundUser) {
-      res.status(409).send({ error: `User with email ${req.body.email} already exists` });
+      res.status(409).send({ status: 409, error: `User with email ${req.body.email} already exists` });
     } else {
       try {
         req.body.is_admin = false;
