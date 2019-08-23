@@ -2,6 +2,16 @@
 import database from '../models';
 
 class PetitionService {
+  static async checkExists(title) {
+    try {
+      return await database.petitions.count({
+        where: [{ title }],
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addPetition(newPetiton) {
     try {
       return await database.petitions.create(newPetiton);
