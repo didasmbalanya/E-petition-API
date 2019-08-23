@@ -11,7 +11,7 @@ class UserService {
   static async findUserByEmail(userEmail) {
     const user = await database.users.findOne({ where: { email: userEmail } });
     if (!user) return false;
-    return user;
+    return user.dataValues;
   }
 
   static async signIn(email, pass) {
