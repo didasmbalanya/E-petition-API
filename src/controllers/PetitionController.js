@@ -1,3 +1,4 @@
+/* eslint-disable lines-between-class-members */
 /* eslint-disable camelcase */
 /* eslint-disable no-useless-catch */
 import PetitonService from '../services/PetitionServices';
@@ -46,6 +47,32 @@ class PetitionController {
 
       await db.petitions.destroy({ where: { id: Number(req.params.id) } });
       res.json({ status: 200, message: 'petition has been deleted successfully' });
+    } catch (error) {
+      throw (error);
+    }
+  }
+  // eslint-disable-next-line consistent-return
+  static async viewSpecificPetition(req, res) {
+    try {
+      const petition = await db.petitions.findOne({ where: { id: Number(req.params.id) } });
+      if (!petition) {
+        util.setError(400, 'Petition does not exist');
+        return util.send(res);
+      }
+      const votesFor = await db.votes.count({ where: { petition_id: Number(req.params.id), vote: 'TRUE' } });
+      const votesAgainst = await db.votes.count({ where: { petition_id: Number(req.params.id), vote: 'FALSE' } });
+
+      const votes = {
+        id: petition.id,
+        title: petition.title,
+        description: petition.description,
+        votesFor,
+        votesAgainst,
+      };
+      // eslint-disable-next-line no-console
+
+      util.setSuccess(200, 'All Votes!', votes);
+      return util.send(res);
     } catch (error) {
       throw (error);
     }
