@@ -16,4 +16,5 @@ router.post('/', auth, petitionValidator, addPetition);
 router.get('/', viewPetitions);
 router.get('/', specificTitlesPetitions);
 
+
 export default router;

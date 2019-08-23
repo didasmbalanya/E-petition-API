@@ -97,13 +97,13 @@ class PetitionController {
   }
 
   static async specificTitlesPetitions(req, res) {
-    if (req.params.title) {
-      const matchesFound = await db.petitons.findAndCountAll({
-        where: {
-          title: req.params.title,
-        },
-      });
-      res.status(200).send({ status: 200, data: matchesFound });
+    try {
+      if (req.query.title) {
+        const matchesFound = await db.petitions.findAll({ where: { title: (req.query.title) } });
+        res.status(200).send({ status: 200, data: matchesFound[0].dataValues });
+      }
+    } catch (e) {
+      res.status(404).send({ status: 404, error: `No petitions found with the title: ${req.query.title}` });
     }
   }
 }
