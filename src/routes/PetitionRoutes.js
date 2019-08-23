@@ -6,9 +6,9 @@ import Validation from '../validation/validation';
 
 const router = new Router();
 const { petitionValidator } = Validation;
-const { addPetition, deletePetition } = PetitionController;
+const { addPetition, deletePetition, viewSpecificPetition } = PetitionController;
 
 router.delete('/:id', auth, deletePetition);
 router.post('/', petitionValidator, addPetition);
-
+router.get('/:id', viewSpecificPetition);
 export default router;
