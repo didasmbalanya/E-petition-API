@@ -19,7 +19,7 @@ export const genericValidator = (req, res, schema, next) => {
   return next();
 };
 
-export class Validation {
+export default class Validation {
   static userValidator(req, res, next) {
     const schema = Joi.object().keys({
       email: Joi.string()
@@ -55,7 +55,40 @@ export class Validation {
         .min(6)
         .max(50)
         .required(),
+      confirm_password: Joi.string()
+        .min(6)
+        .max(50)
+        .required(),
       is_admin: Joi.boolean(),
+    });
+    genericValidator(req, res, schema, next);
+  }
+
+  static petitionValidator(req, res, next) {
+    const schema = Joi.object().keys({
+      title: Joi.string().required(),
+      description: Joi.string()
+        .min(10),
+    });
+    genericValidator(req, res, schema, next);
+  }
+
+  static signInValidator(req, res, next) {
+    const schema = Joi.object().keys({
+      email: Joi.string()
+        .email({ minDomainSegments: 2 })
+        .required(),
+      password: Joi.string()
+        .min(6)
+        .max(50)
+        .required(),
+    });
+    genericValidator(req, res, schema, next);
+  }
+
+  static voteValidator(req, res, next) {
+    const schema = Joi.object().keys({
+      vote: Joi.boolean().required(),
     });
     genericValidator(req, res, schema, next);
   }
