@@ -77,6 +77,24 @@ class PetitionController {
       throw (error);
     }
   }
+
+  // eslint-disable-next-line consistent-return
+  static async viewPetitions(req, res) {
+    try {
+      const petitions = await db.petitions.findAll();
+
+      const allPetitions = [];
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < petitions.length; i++) {
+        allPetitions.push(petitions[i].dataValues);
+      }
+
+      if (allPetitions.length > 0) res.json({ status: 200, message: 'All petitions', data: allPetitions });
+      else res.json({ status: 200, message: 'No petitions found' });
+    } catch (error) {
+      throw (error);
+    }
+  }
 }
 
 export default PetitionController;
