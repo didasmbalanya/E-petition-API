@@ -95,6 +95,17 @@ class PetitionController {
       throw (error);
     }
   }
+
+  static async specificTitlesPetitions(req, res) {
+    if (req.params.title) {
+      const matchesFound = await db.petitons.findAndCountAll({
+        where: {
+          title: req.params.title,
+        },
+      });
+      res.status(200).send({ status: 200, data: matchesFound });
+    }
+  }
 }
 
 export default PetitionController;
