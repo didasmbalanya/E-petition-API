@@ -9,6 +9,7 @@ const { petitionValidator } = Validation;
 const { addPetition, deletePetition, viewSpecificPetition } = PetitionController;
 
 router.delete('/:id', auth, deletePetition);
-router.post('/', petitionValidator, addPetition);
 router.get('/:id', viewSpecificPetition);
+router.post('/', auth, petitionValidator, addPetition);
+
 export default router;

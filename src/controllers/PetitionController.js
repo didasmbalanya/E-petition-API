@@ -13,17 +13,17 @@ class PetitionController {
     const expired = false;
     const { title, description } = req.body;
     // eslint-disable-next-line camelcase
-    const user_id = 1; // get from the token
+    const user_id = req.user.id;
     const newPetition = {
       user_id, title, description, votes, expired,
     };
+    const checkExist = await PetitonService.checkExists(title);
+    if (checkExist) {
+      util.setError(409, `Petition with the title: '${title}' already exists`);
+      return util.send(res);
+    }
     try {
       const createdPetition = await PetitonService.addPetition(newPetition);
-
-      if (createdPetition === 'exists') {
-        util.setError(409, `Petition with the title: '${title}' already exists`);
-        return util.send(res);
-      }
       util.setSuccess(201, 'Petition successifully created', createdPetition);
       return util.send(res);
     } catch (error) {

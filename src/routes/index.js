@@ -16,9 +16,4 @@ router.use('/petitions', PetitionRoutes);
 router.use('/votes', VoteRoutes);
 router.use('/flags', FlagRoutes);
 
-// when a random route is inputed
-router.route('*', (req, res) => {
-  res.status(404).send({ error: 'route not found' });
-});
-
 export default router;
