@@ -77,6 +77,35 @@ class PetitionController {
       throw (error);
     }
   }
+
+  // eslint-disable-next-line consistent-return
+  static async viewPetitions(req, res) {
+    try {
+      const petitions = await db.petitions.findAll();
+
+      const allPetitions = [];
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < petitions.length; i++) {
+        allPetitions.push(petitions[i].dataValues);
+      }
+
+      if (allPetitions.length > 0) res.json({ status: 200, message: 'All petitions', data: allPetitions });
+      else res.json({ status: 200, message: 'No petitions found' });
+    } catch (error) {
+      throw (error);
+    }
+  }
+
+  static async specificTitlesPetitions(req, res) {
+    try {
+      if (req.query.title) {
+        const matchesFound = await db.petitions.findAll({ where: { title: (req.query.title) } });
+        res.status(200).send({ status: 200, data: matchesFound[0].dataValues });
+      }
+    } catch (e) {
+      res.status(404).send({ status: 404, error: `No petitions found with the title: ${req.query.title}` });
+    }
+  }
 }
 
 export default PetitionController;

@@ -18,10 +18,10 @@ class UserService {
     // compare password
     const currentUser = await UserService.findUserByEmail(email);
 
-    const checkPass = comparePassword(pass, currentUser.dataValues.password);
+    const checkPass = comparePassword(pass, currentUser.password);
 
     if (checkPass) {
-      const { password, ...userWP } = currentUser.dataValues;
+      const { password, ...userWP } = currentUser;
       const token = jwtSign(userWP);
       return { token, ...userWP };
     }
