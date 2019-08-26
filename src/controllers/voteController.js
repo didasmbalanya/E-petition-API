@@ -21,18 +21,19 @@ class voteController {
             return util.send(res);
             }
         // eslint-disable-next-line camelcase
-        const { vote } = req.body;
-        // eslint-disable-next-line camelcase
-        const petition_id = req.params.id;
-        const newVote = {
-            petition_id,
-            user_id: req.user.dataValues.id,
-            vote,
-        };
-        const alteredVote = req.body;
+
         try {
+            const { vote } = req.body;
+            // eslint-disable-next-line camelcase
+            const petition_id = req.params.id;
+            const newVote = {
+                petition_id,
+                user_id: req.user.id,
+                vote,
+            };
+            const alteredVote = req.body;
             // search if user already voted on certain petition
-            const theVote = await voteService.findVote(req.user.dataValues.id, petition_id);
+            const theVote = await voteService.findVote(req.user.id, petition_id);
             if (theVote) {
                 if (theVote.dataValues.vote === true) {
                     if (req.body.vote === 'true') {
@@ -42,7 +43,7 @@ class voteController {
                     if (req.body.vote === 'false') {
                         const updatePetition = await PetitionService.downVote(petition_id);
                         // eslint-disable-next-line max-len
-                        const updateVote = await voteService.updateVote(req.user.dataValues.id, petition_id, alteredVote);
+                        const updateVote = await voteService.updateVote(req.user.id, petition_id, alteredVote);
                         util.setSuccess(200, 'Vote updated!', updateVote);
                         return util.send(res);
                     }
@@ -51,7 +52,7 @@ class voteController {
                     if (req.body.vote === 'true') {
                         const updatePetition = await PetitionService.upVote(petition_id);
                         // eslint-disable-next-line max-len
-                        const updateVote = await voteService.updateVote(req.user.dataValues.id, petition_id, alteredVote);
+                        const updateVote = await voteService.updateVote(req.user.id, petition_id, alteredVote);
                         util.setSuccess(200, 'Vote updated!', updateVote);
                         return util.send(res);
                     } if (req.body.vote === 'false') {
