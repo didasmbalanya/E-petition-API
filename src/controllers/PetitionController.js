@@ -90,7 +90,7 @@ class PetitionController {
       }
 
       if (allPetitions.length > 0) res.json({ status: 200, message: 'All petitions', data: allPetitions });
-      else res.json({ status: 200, message: 'No petitions found' });
+      else res.json({ status: 404, message: 'No petitions found' });
     } catch (error) {
       throw (error);
     }

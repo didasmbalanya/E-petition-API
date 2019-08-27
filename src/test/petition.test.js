@@ -54,7 +54,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
     it('Should create a petition for an authorised user', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -67,7 +67,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
     it('Should not create a petition wiht invalid parameters', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -79,7 +79,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
     it('Should not create a petition which already exist', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -91,7 +91,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
     it('Should return a specific petition', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/1')
@@ -101,7 +101,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
     it('Should  not return anything in case petition does not exist', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/100')
@@ -111,7 +111,24 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    
+
+    it('Should return all petitions if they are found', async () => {
+      const res = await chai.request(app).get('/api/v1/petitions');
+
+      expect(res.status).to.equal(200);
+    });
+
+    it('Should 404 if no petition found', async () => {
+      await chai.request(app)
+        .delete('/api/v1/petitions/1')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`);
+
+      const res = await chai.request(app).get('/api/v1/petitions');
+
+      expect(res.body.status).to.equal(404);
+    });
+
     it('Should delete a petition', (done) => {
       chai.request(app)
         .delete('/api/v1/petitions/1')
