@@ -1,0 +1,17 @@
+language: node_js
+node_js : 
+  - node
+services:
+ - postgresql
+
+before_install:
+ - psql -c 'create database petitioner_test' -U postgres
+install:
+  - npm install
+cache:
+  directories:
+    - "node_modules"
+script:
+  - npm run test
+after_success: 
+  - npm run coveralls
