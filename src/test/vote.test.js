@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import chai from 'chai';
 import chatHttp from 'chai-http';
@@ -24,14 +25,15 @@ describe('Testing Routes : Vote', () => {
     title: 'title of the petition 2',
     description: 'describe the petition 2',
   };
+  const petition2 = {
+    title: 'title of the petition 3',
+    description: 'describe the petition 3',
+  };
   const vote = {
     vote: 'true',
   };
   const voteAgainst = {
     vote: 'false',
-  };
-  const blankVote = {
-    vote: '',
   };
   before((done) => {
     chai.request(app)
@@ -53,12 +55,32 @@ describe('Testing Routes : Vote', () => {
         done();
       });
   });
-
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/petitions/')
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send(petition2)
+      .end((err, res) => {
+        console.log(res.body)
+        done();
+      });
+  });
 
   describe('PATCH api/v1/votes', () => {
-    it('Should create a vote when all required conditions are met', (done) => {
+    it('Should not upVote a vote when parameter is not an integer', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
+        .patch('/api/v1/petitions/2a/votes/upVote')
+        .set('Authorization', `Bearer ${token}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('Should upVote a vote when all required conditions are met', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/2/votes/upVote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -66,19 +88,9 @@ describe('Testing Routes : Vote', () => {
           done();
         });
     });
-    it('Should not create a vote when vote is not passed', (done) => {
+    it('Should not upvote a vote when petition does not exist', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
-        .set('Authorization', `Bearer ${token}`)
-        .send(blankVote)
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
-          done();
-        });
-    });
-    it('Should not create a vote when petition does not exist', (done) => {
-      chai.request(app)
-        .patch('/api/v1/votes/100/vote')
+        .patch('/api/v1/petitions/100/votes/upVote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -88,7 +100,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not update same vote twice', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
+        .patch('/api/v1/petitions/2/votes/upVote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -98,7 +110,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should update a vote to false on request', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
+        .patch('/api/v1/petitions/2/votes/downVote')
         .set('Authorization', `Bearer ${token}`)
         .send(voteAgainst)
         .end((err, res) => {
@@ -108,7 +120,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not update same false vote twice', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
+        .patch('/api/v1/petitions/2/votes/downVote')
         .set('Authorization', `Bearer ${token}`)
         .send(voteAgainst)
         .end((err, res) => {
@@ -118,11 +130,41 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should update a vote back to true on request', (done) => {
       chai.request(app)
-        .patch('/api/v1/votes/2/vote')
+        .patch('/api/v1/petitions/2/votes/upVote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('Should not downVote a vote when parameter is not an integer', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/2a/votes/downVote')
+        .set('Authorization', `Bearer ${token}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('Should not upvote a vote when petition does not exist', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/100/votes/downVote')
+        .set('Authorization', `Bearer ${token}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('Should downVote a vote when all required conditions are met', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/3/votes/downVote')
+        .set('Authorization', `Bearer ${token}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
           done();
         });
     });

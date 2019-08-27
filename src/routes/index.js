@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import UserRoutes from './UserRoutes';
 import PetitionRoutes from './PetitionRoutes';
-import VoteRoutes from './VoteRoutes';
 import FlagRoutes from './FlagRoutes';
 
 
@@ -13,7 +12,6 @@ router.route('/').get((req, res) => {
 
 router.use('/users', UserRoutes);
 router.use('/petitions', PetitionRoutes);
-router.use('/votes', VoteRoutes);
 router.use('/flags', FlagRoutes);
 
 export default router;

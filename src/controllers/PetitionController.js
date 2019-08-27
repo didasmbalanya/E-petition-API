@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable lines-between-class-members */
 /* eslint-disable camelcase */
 /* eslint-disable no-useless-catch */
@@ -53,6 +54,10 @@ class PetitionController {
   }
   // eslint-disable-next-line consistent-return
   static async viewSpecificPetition(req, res) {
+    if (isNaN(req.params.id)) {
+      util.setError(400, 'Petition id must be an Integer');
+      return util.send(res);
+    }
     try {
       const petition = await db.petitions.findOne({ where: { id: Number(req.params.id) } });
       if (!petition) {

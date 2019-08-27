@@ -101,7 +101,15 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-
+    it('Should not return a specific petition in case parameter is not ingeger', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitions/1a')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
     it('Should  not return anything in case petition does not exist', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/100')
