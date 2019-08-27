@@ -54,6 +54,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
+    
     it('Should create a petition for an authorised user', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -66,6 +67,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
+    
     it('Should not create a petition wiht invalid parameters', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -77,6 +79,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
+    
     it('Should not create a petition which already exist', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -88,6 +91,27 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
+    
+    it('Should return a specific petition', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitions/1')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    
+    it('Should  not return anything in case petition does not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitions/100')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    
     it('Should delete a petition', (done) => {
       chai.request(app)
         .delete('/api/v1/petitions/1')
