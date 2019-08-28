@@ -12,6 +12,6 @@ const { signIn, signUp, changeAdmin } = UserController;
 
 router.route('/auth/signup').post(userValidator, signUp).all(wrongMethod);
 router.route('/auth/signin').post(signInValidator, signIn).all(wrongMethod);
-router.route('/auth/:id').patch(auth, changeAdmin).all(wrongMethod);
+router.route('/admin/:id').patch(auth, changeAdmin).all(wrongMethod);
 
 export default router;
