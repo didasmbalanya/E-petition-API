@@ -47,26 +47,32 @@ class UserController {
     return res.status(404).json({ status: 404, error: 'incorrect email or password' });
   }
 
-  static async toAdmin(req, res) {
+  static async changeAdmin(req, res) {
     try {
-      if (!req.params.id || typeof (parseInt(req.params.id)) !== 'number') {
+      if (!req.params.id || typeof (parseInt(req.params.id)) !== 'number' || !req.query.isadmin) {
         throw Error();
       }
       if (req.user.is_admin === false) {
         return res.status(401).send({ status: 401, message: 'method not allowed', error: 'Only admin allowed' });
       }
       const foundUser = await db.users.findOne({ where: { id: Number(req.params.id) } });
-      const user = foundUser.dataValues;
-      if (!user) {
+      if (!foundUser) {
         return res.status(409).send({ status: 409, error: `User with id ${req.params.id} does not exists` });
       }
-      if (user.is_admin === true) {
-        return res.status(400).send({ status: 400, error: 'user is already an admin ' });
+      if (req.query.isadmin === 'true' || req.query.isadmin === 'false') {
+        const user = foundUser.dataValues;
+        if (user.is_admin.toString() === req.query.isadmin) {
+          return res.status(400).send({ status: 400, error: `user already has admin status ${req.query.isadmin}` });
+        }
+        if (user.is_admin !== req.query.isadmin) {
+          await db.users.update({ is_admin: req.query.isadmin }, { where: { id: Number(req.params.id) } });
+          return res.status(200).send({ status: 200, message: 'success' });
+        }
+      } else {
+        return res.status(400).send({ status: 400, error: 'Invalid parameters' });
       }
-      await db.users.update({ is_admin: true }, { where: { id: Number(req.params.id) } });
-      return res.status(200).send({ status: 200, message: 'success' });
     } catch (e) {
-      res.status(400).send({ error: 'Bad request' });
+      res.status(400).send({ error: 'Bad request ' });
     }
   }
 }
