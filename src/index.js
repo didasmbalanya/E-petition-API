@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 3000;
 
 app.use('/api/v1/', routes);
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.status(404).send({ error: 'route not found' });
 });
 

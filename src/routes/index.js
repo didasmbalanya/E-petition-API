@@ -10,7 +10,7 @@ router.route('/').get((req, res) => {
   res.status(200).json({ message: 'welcome to petitioner API' });
 });
 
-router.use('/users', UserRoutes);
+router.use('/', UserRoutes);
 router.use('/petitions', PetitionRoutes);
 router.use('/flags', FlagRoutes);
 

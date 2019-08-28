@@ -22,7 +22,7 @@ describe('Testing Routes : Petition', () => {
 
   before((done) => {
     chai.request(app)
-      .post('/api/v1/users/signUp')
+      .post('/api/v1/auth/signup')
       .set('Accept', 'applicatio/json')
       .send(user)
       .end((err, res) => {
@@ -101,7 +101,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    it('Should not return a specific petition in case parameter is not ingeger', (done) => {
+    it('Should not return a specific petition in case parameter is not integer', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/1a')
         .set('Accept', 'application/json')

@@ -2,7 +2,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import userService from '../services/userServices';
-import Util from '../utils/Utils';
 import { getPublicProfile } from '../utils/userUtils';
 
 const { secret } = process.env;
@@ -22,7 +21,7 @@ class UserController {
           res.status(201).send({ status: 201, data: getPublicProfile(newUser), token });
         }
       } catch (error) {
-        res.status(404).send({ status: 404, error });
+        throw new Error('Unexpected');
       }
     }
   }
@@ -40,8 +39,7 @@ class UserController {
 
       return res.status(200).json(data);
     }
-    Util.setError(404, 'error occured while trying to log you in');
-    return Util.send(res);
+    return res.status(404).json({ status: 404, error: 'incorrect email or password' });
   }
 }
 
