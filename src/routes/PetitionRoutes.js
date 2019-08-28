@@ -20,8 +20,7 @@ router.route('/:id')
   .all(wrongMethod);
 
 router.route('/')
-  .get(viewPetitions)
-  .get(specificTitlesPetitions)
+  .get(specificTitlesPetitions, viewPetitions)
   .post(auth, petitionValidator, addPetition)
   .all(wrongMethod);
 

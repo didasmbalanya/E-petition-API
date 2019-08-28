@@ -53,7 +53,7 @@ class UserController {
         throw Error();
       }
       if (req.user.is_admin === false) {
-        return res.status(401).send({ status: 401, message: 'method not allowed', error: 'Only admin allowed' });
+        return res.status(403).send({ status: 403, message: 'Forbidden, Only admin allowed' });
       }
       const foundUser = await db.users.findOne({ where: { id: Number(req.params.id) } });
       if (!foundUser) {
