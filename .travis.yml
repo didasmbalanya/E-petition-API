@@ -7,6 +7,7 @@ services:
 before_install:
  - psql -c 'create database petitioner_test' -U postgres
 install:
+  - npm i -g sequelize-cli
   - npm install
 cache:
   directories:
