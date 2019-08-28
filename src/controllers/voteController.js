@@ -1,3 +1,5 @@
+/* eslint-disable no-cond-assign */
+/* eslint-disable camelcase */
 /* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable lines-between-class-members */
@@ -28,6 +30,10 @@ class voteController {
         // eslint-disable-next-line camelcase
 
             // eslint-disable-next-line camelcase
+            if (petition.dataValues.user_id === req.user.id) {
+                util.setError(400, 'You can not vote your own petition');
+                return util.send(res);
+            }
             const petition_id = req.params.id;
             const newVote = {
                 petition_id,
@@ -76,7 +82,10 @@ class voteController {
             return util.send(res);
             }
         // eslint-disable-next-line camelcase
-
+        if (petition.dataValues.user_id === req.user.id) {
+            util.setError(400, 'You can not vote your own petition');
+            return util.send(res);
+        }
             // eslint-disable-next-line camelcase
             const petition_id = req.params.id;
             const newVote = {

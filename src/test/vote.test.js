@@ -11,8 +11,19 @@ const { expect } = chai;
 describe('Testing Routes : Vote', () => {
   // test that a a user can create a petition
   let token = null;
+  let token2 = null;
   const user = {
     email: 'test@gmail.com',
+    first_name: 'test',
+    last_name: 'test',
+    phone_number: '000000000',
+    address: 'Kicukiro',
+    password: '123456',
+    confirm_password: '123456',
+  };
+
+  const user2 = {
+    email: 'test2@gmail.com',
     first_name: 'test',
     last_name: 'test',
     phone_number: '000000000',
@@ -47,9 +58,19 @@ describe('Testing Routes : Vote', () => {
   });
   before((done) => {
     chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'applicatio/json')
+      .send(user2)
+      .end((err, res) => {
+        token2 = res.body.token;
+        done();
+      });
+  });
+  before((done) => {
+    chai.request(app)
       .post('/api/v1/petitions/')
       .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${token2}`)
       .send(petition)
       .end((err, res) => {
         done();
@@ -59,7 +80,7 @@ describe('Testing Routes : Vote', () => {
     chai.request(app)
       .post('/api/v1/petitions/')
       .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${token2}`)
       .send(petition2)
       .end((err, res) => {
         done();
@@ -84,6 +105,26 @@ describe('Testing Routes : Vote', () => {
         .send(vote)
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          done();
+        });
+    });
+    it('User should not upvote his own petition', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/2/votes/upvote')
+        .set('Authorization', `Bearer ${token2}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('User should not downvote his own petition', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/2/votes/downvote')
+        .set('Authorization', `Bearer ${token2}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
           done();
         });
     });
