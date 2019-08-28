@@ -101,7 +101,7 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
-    it('Should not return a specific petition in case parameter is not ingeger', (done) => {
+    it('Should not return a specific petition in case parameter is not integer', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/1a')
         .set('Accept', 'application/json')
