@@ -37,7 +37,7 @@ describe('Testing Routes : Vote', () => {
   };
   before((done) => {
     chai.request(app)
-      .post('/api/v1/users/signUp')
+      .post('/api/v1/auth/signup')
       .set('Accept', 'applicatio/json')
       .send(user)
       .end((err, res) => {
@@ -62,7 +62,6 @@ describe('Testing Routes : Vote', () => {
       .set('Authorization', `Bearer ${token}`)
       .send(petition2)
       .end((err, res) => {
-        console.log(res.body)
         done();
       });
   });
@@ -70,7 +69,7 @@ describe('Testing Routes : Vote', () => {
   describe('PATCH api/v1/votes', () => {
     it('Should not upVote a vote when parameter is not an integer', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2a/votes/upVote')
+        .patch('/api/v1/petitions/2a/votes/upvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -80,7 +79,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should upVote a vote when all required conditions are met', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2/votes/upVote')
+        .patch('/api/v1/petitions/2/votes/upvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -90,7 +89,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not upvote a vote when petition does not exist', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/100/votes/upVote')
+        .patch('/api/v1/petitions/100/votes/upvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -100,7 +99,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not update same vote twice', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2/votes/upVote')
+        .patch('/api/v1/petitions/2/votes/upvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -110,7 +109,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should update a vote to false on request', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2/votes/downVote')
+        .patch('/api/v1/petitions/2/votes/downvote')
         .set('Authorization', `Bearer ${token}`)
         .send(voteAgainst)
         .end((err, res) => {
@@ -120,7 +119,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not update same false vote twice', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2/votes/downVote')
+        .patch('/api/v1/petitions/2/votes/downvote')
         .set('Authorization', `Bearer ${token}`)
         .send(voteAgainst)
         .end((err, res) => {
@@ -130,7 +129,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should update a vote back to true on request', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2/votes/upVote')
+        .patch('/api/v1/petitions/2/votes/upvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -140,7 +139,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not downVote a vote when parameter is not an integer', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/2a/votes/downVote')
+        .patch('/api/v1/petitions/2a/votes/downvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -150,7 +149,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should not upvote a vote when petition does not exist', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/100/votes/downVote')
+        .patch('/api/v1/petitions/100/votes/downvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {
@@ -160,7 +159,7 @@ describe('Testing Routes : Vote', () => {
     });
     it('Should downVote a vote when all required conditions are met', (done) => {
       chai.request(app)
-        .patch('/api/v1/petitions/3/votes/downVote')
+        .patch('/api/v1/petitions/3/votes/downvote')
         .set('Authorization', `Bearer ${token}`)
         .send(vote)
         .end((err, res) => {

@@ -17,8 +17,8 @@ router.get('/:id', viewSpecificPetition);
 router.post('/', auth, petitionValidator, addPetition);
 router.get('/', viewPetitions);
 router.get('/', specificTitlesPetitions);
-router.patch('/:id/votes/upVote', auth, upVote);
-router.patch('/:id/votes/downVote', auth, downVote);
+router.patch('/:id/votes/upvote', auth, upVote);
+router.patch('/:id/votes/downvote', auth, downVote);
 
 
 export default router;

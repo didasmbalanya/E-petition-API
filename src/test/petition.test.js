@@ -22,7 +22,7 @@ describe('Testing Routes : Petition', () => {
 
   before((done) => {
     chai.request(app)
-      .post('/api/v1/users/signUp')
+      .post('/api/v1/auth/signup')
       .set('Accept', 'applicatio/json')
       .send(user)
       .end((err, res) => {
