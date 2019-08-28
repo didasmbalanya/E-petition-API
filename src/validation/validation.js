@@ -85,11 +85,4 @@ export default class Validation {
     });
     genericValidator(req, res, schema, next);
   }
-
-  static voteValidator(req, res, next) {
-    const schema = Joi.object().keys({
-      vote: Joi.boolean().required(),
-    });
-    genericValidator(req, res, schema, next);
-  }
 }
