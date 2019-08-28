@@ -1,6 +1,11 @@
+/* eslint-disable consistent-return */
+/* eslint-disable radix */
+/* eslint-disable max-len */
+/* eslint-disable no-restricted-globals */
 /* eslint-disable import/no-unresolved */
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import db from '../models';
 import userService from '../services/userServices';
 import { getPublicProfile } from '../utils/userUtils';
 
@@ -41,6 +46,30 @@ class UserController {
     }
     return res.status(404).json({ status: 404, error: 'incorrect email or password' });
   }
+
+  static async toAdmin(req, res) {
+    try {
+      if (!req.params.id || typeof (parseInt(req.params.id)) !== 'number') {
+        throw Error();
+      }
+      if (req.user.is_admin === false) {
+        return res.status(401).send({ status: 401, message: 'method not allowed', error: 'Only admin allowed' });
+      }
+      const foundUser = await db.users.findOne({ where: { id: Number(req.params.id) } });
+      const user = foundUser.dataValues;
+      if (!user) {
+        return res.status(409).send({ status: 409, error: `User with id ${req.params.id} does not exists` });
+      }
+      if (user.is_admin === true) {
+        return res.status(400).send({ status: 400, error: 'user is already an admin ' });
+      }
+      await db.users.update({ is_admin: true }, { where: { id: Number(req.params.id) } });
+      return res.status(200).send({ status: 200, message: 'success' });
+    } catch (e) {
+      res.status(400).send({ error: 'Bad request' });
+    }
+  }
 }
+
 
 export default UserController;

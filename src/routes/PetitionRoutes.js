@@ -33,5 +33,4 @@ router.route('/:id/votes/downvote')
   .patch(auth, downVote)
   .all(wrongMethod);
 
-
 export default router;
