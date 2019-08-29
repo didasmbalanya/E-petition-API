@@ -17,22 +17,16 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'emails', 'name'],
 },
 (async (accessToken, refreshToken, profile, cb) => {
-  const { dataValues: mUser } = await models.users
-    .findOne({ where: { email: profile.emails[0].value } });
-    // strip out password
-  const {
-    password,
-    // eslint-disable-next-line camelcase
-    phone_number,
-    address,
-    // eslint-disable-next-line camelcase
-    is_admin,
-    createdAt,
-    updatedAt,
-    ...user
-  } = mUser;
-  // eslint-disable-next-line no-console
-  return cb(null, user);
+  const fbUser = {
+    first_name: profile.name.familyName,
+    last_name: profile.name.givenName,
+    email: profile.emails[0].value,
+  };
+  // eslint-disable-next-line no-unused-vars
+  const [mUser, created] = await models.users
+    .findOrCreate({ where: { email: fbUser.email }, defaults: fbUser });
+  const { id } = mUser;
+  return cb(null, { id, ...fbUser });
 })));
 
 passport.serializeUser((user, done) => {

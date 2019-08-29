@@ -11,8 +11,7 @@ import { getPublicProfile } from '../utils/userUtils';
 import AuthenticationHelper from '../utils/AuthenticationHelper';
 
 const { secret } = process.env;
-const { signIn } = userService;
-const { jwtSign } = AuthenticationHelper;
+const { jwtSign, comparePassword } = AuthenticationHelper;
 class UserController {
   static async signUp(req, res) {
     const foundUser = await userService.findUserByEmail(req.body.email);
@@ -35,18 +34,22 @@ class UserController {
 
   static async signIn(req, res) {
     const { email, password } = req.body;
-    const response = await signIn(email, password);
-
-    if (response) {
-      const data = {
-        status: 200,
-        token: response.token,
-        data: getPublicProfile(response),
-      };
-
-      return res.status(200).json(data);
+    const currentUser = await userService.findUserByEmail(email);
+    if (!currentUser) {
+      return res.status(404).json({ status: 404, error: 'email not found!' });
     }
-    return res.status(404).json({ status: 404, error: 'incorrect email or password' });
+    const checkPass = comparePassword(password, currentUser.password);
+
+    if (!checkPass) {
+      return res.status(404).json({ status: 404, error: 'incorrect password' });
+    }
+    const token = jwtSign(currentUser.email);
+    const data = {
+      status: 200,
+      token,
+      data: getPublicProfile(currentUser),
+    };
+    return res.status(200).json(data);
   }
 
   static async changeAdmin(req, res) {

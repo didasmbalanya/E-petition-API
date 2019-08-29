@@ -26,6 +26,7 @@ export function up(queryInterface, Sequelize) {
     },
     is_admin: {
       type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
     createdAt: {
       allowNull: false,
