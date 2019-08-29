@@ -49,7 +49,7 @@ describe('Testing Routes : Vote', () => {
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .set('Accept', 'applicatio/json')
+      .set('Accept', 'application/json')
       .send(user)
       .end((err, res) => {
         token = res.body.token;
@@ -205,6 +205,17 @@ describe('Testing Routes : Vote', () => {
         .send(vote)
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          done();
+        });
+    });
+
+    it('Should not be able to vote when user is not authenticated', (done) => {
+      chai.request(app)
+        .patch('/api/v1/petitions/3/votes/downvote')
+        .set('Authorization', `Bearer ${petition}`)
+        .send(vote)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
     });

@@ -55,6 +55,18 @@ describe('Testing Routes : Petition', () => {
         });
     });
 
+    it('Should ensure a user has a token', (done) => {
+      chai.request(app)
+        .post('/api/v1/petitions/')
+        .set('Accept', 'application/json')
+        .set('Authorization', 'Bearer ')
+        .send(petition)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+    });
+
     it('Should create a petition for an authorised user', (done) => {
       chai.request(app)
         .post('/api/v1/petitions/')
@@ -101,6 +113,37 @@ describe('Testing Routes : Petition', () => {
           done();
         });
     });
+
+    it('Should return a specific petition when searched by title', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitions?title=title of the petition')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('Should return error when searched by title and does not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitions?title=no pettition')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('Should return 404 for a route not found', (done) => {
+      chai.request(app)
+        .get('/api/v1/petitionsdeded')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+
     it('Should not return a specific petition in case parameter is not integer', (done) => {
       chai.request(app)
         .get('/api/v1/petitions/1a')
@@ -145,6 +188,18 @@ describe('Testing Routes : Petition', () => {
         .send(petition)
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('Should not delete a petition if not auth', (done) => {
+      chai.request(app)
+        .delete('/api/v1/petitions/1')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${petition}`)
+        .send(petition)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
     });
