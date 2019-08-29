@@ -6,3 +6,26 @@
 An online platform that allows users to create and participate in petitions.
 ## Vision
 The vision of this project is to help the government know it’s citizens concerns faster & easier way without them having to demonstrate.
+
+## API ENDPOINTS
+### *BASEURL : `/api/v1/`*
+
+### AUTHENTICATION END POINTS  : `/auth/`
+
+HTTP METHOD | END POINT | AUTHENTICATED | DESCRIPTION
+-----------|----------|--------------|------
+POST | `/signup` | `False` | Create a New User
+POST | `/signin` | `False` | Authenticate The User
+GET | `/facebook` | `False` | Login With Facebook
+
+### PETITIONS END POINTS
+
+HTTP METHOD | END POINT | AUTHENTICATED | DESCRIPTION
+-----------|----------|--------------|------
+GET | `/petitions` | `False` | Get all Petitions
+GET | `/petitions/:id` | `False` | Get  specific petition by id
+GET | `/petitions?title=name` | `False` | Get petition by title
+POST | `/petitions` | `True` | Create a Petition
+PATCH | `/petitions/:id/votes/upvote` | `True` | Vote a Petition Up
+PATCH | `/petitions/:id/votes/downvote` | `True` | Vote against Petition
+DELETE | `/petitions/:id` | `True` | Delete a Petition

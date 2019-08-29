@@ -8,9 +8,11 @@ import bcrypt from 'bcrypt';
 import db from '../models';
 import userService from '../services/userServices';
 import { getPublicProfile } from '../utils/userUtils';
+import AuthenticationHelper from '../utils/AuthenticationHelper';
 
 const { secret } = process.env;
 const { signIn } = userService;
+const { jwtSign } = AuthenticationHelper;
 class UserController {
   static async signUp(req, res) {
     const foundUser = await userService.findUserByEmail(req.body.email);
@@ -74,6 +76,12 @@ class UserController {
     } catch (e) {
       res.status(400).send({ error: 'Bad request ' });
     }
+  }
+
+  static async fbSignIn(req, res) {
+    const { user } = req.session.passport;
+    const token = jwtSign(user.email);
+    res.status(200).json({ status: 200, token, data: user });
   }
 }
 
