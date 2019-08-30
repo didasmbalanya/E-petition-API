@@ -85,7 +85,7 @@ class UserController {
 
   static async fbSignIn(req, res) {
     const { user } = req.session.passport;
-    const token = jwtSign(user.email);
+    const token = jwtSign({ email: user.email });
     res.status(200).json({ status: 200, token, data: user });
   }
 }
