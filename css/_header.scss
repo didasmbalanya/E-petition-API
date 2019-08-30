@@ -1,6 +1,6 @@
 @import './variables';
 #navbar{
-    background-color: $mainColor;
+    background-color: $background;
     margin-top: 0px;
     width: 100%;
     margin-bottom: 26px;
@@ -16,8 +16,9 @@
         padding-bottom: .3125rem;
         margin-right: 1rem;
         font-size: 1.25rem;
-        color: $textColor2;
+        color: $mainColor;
         text-decoration: none;
+        padding-left:300px;
     }
     #menu-lg{
         display: flex;
@@ -26,7 +27,7 @@
         li{
             padding-left: 20px;
             a{
-                color: $textColor2;
+                color: $mainColor;
                 text-decoration: none;
             }
 

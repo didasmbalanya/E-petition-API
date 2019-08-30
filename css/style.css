@@ -26,8 +26,9 @@
   padding-bottom: .3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
-  color: white;
+  color: #1976D2;
   text-decoration: none;
+  padding-left: 300px;
 }
 
 #navbar #container #menu-lg {
@@ -42,11 +43,21 @@
 }
 
 #navbar #container #menu-lg li a {
-  color: white;
+  color: #1976D2;
   text-decoration: none;
 }
 
-#forms {
+body {
+  background-color: #f4f4f4;
+}
+
+body #content {
+  background-color: #f4f4f4;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
+body #content #forms {
   max-width: 600px;
   background-color: #fff;
   color: #000;
@@ -59,11 +70,12 @@
   padding-top: 10px;
 }
 
-#forms h1 {
+body #content #forms h1 {
   text-align: center !important;
+  color: #1976D2;
 }
 
-#forms #form-content #line-on-side {
+body #content #forms #form-content #line-on-side {
   border-bottom: 1px solid #DADADA;
   line-height: .1em;
   text-align: center;
@@ -71,25 +83,26 @@
   margin-right: 30px;
 }
 
-#forms #form-content #line-on-side span {
+body #content #forms #form-content #line-on-side span {
   background-color: #fff !important;
   padding-left: 20px !important;
   padding-right: 20px !important;
+  color: #1976D2;
 }
 
-#forms #form-content #main-content #main-fields #form-fieldset {
+body #content #forms #form-content #main-content #main-fields #form-fieldset {
   border: none;
   padding-left: 30px;
   padding-right: 30px;
 }
 
-#forms #form-content #main-content #main-fields #form-fieldset #important {
+body #content #forms #form-content #main-content #main-fields #form-fieldset #important {
   color: red !important;
   display: inline;
   float: none;
 }
 
-#forms #form-content #main-content #main-fields #form-fieldset #form-fields {
+body #content #forms #form-content #main-content #main-fields #form-fieldset #form-fields {
   border: 1px solid #cacfe7;
   color: #3b4781;
   display: block;
@@ -102,16 +115,16 @@
   height: 35px;
 }
 
-#forms #form-content #main-content #main-fields #form-button {
+body #content #forms #form-content #main-content #main-fields #form-button {
   padding: .5rem 1rem;
   font-size: 1.25rem;
   border-radius: .3rem;
-  color: #fff;
+  color: #1976D2;
   background-color: #fff;
   display: inline-block;
   font-weight: 400;
   text-decoration: none;
-  border: 1px solid #fff;
+  border: 1px solid #1976D2;
   font-family: inherit;
   /* align-content: center; */
   display: -webkit-box;
@@ -127,25 +140,25 @@
   width: 540px;
 }
 
-#forms #form-content #main-content #main-fields #form-button:hover {
-  background-color: #fff;
-  color: white;
+body #content #forms #form-content #main-content #main-fields #form-button:hover {
+  background-color: #1976D2;
+  color: #fff;
 }
 
-#forms #form-content #main-content #main-fields #form-button img {
+body #content #forms #form-content #main-content #main-fields #form-button img {
   width: 40px;
 }
 
-#forms #form-content #card-body #form-button {
+body #content #forms #form-content #card-body #form-button {
   padding: .5rem 1rem;
   font-size: 1.25rem;
   border-radius: .3rem;
-  color: #fff;
+  color: #1976D2;
   background-color: #fff;
   display: inline-block;
   font-weight: 400;
   text-decoration: none;
-  border: 1px solid #fff;
+  border: 1px solid #1976D2;
   font-family: inherit;
   /* align-content: center; */
   display: -webkit-box;
@@ -161,27 +174,22 @@
   width: 540px;
 }
 
-#forms #form-content #card-body #form-button:hover {
-  background-color: #fff;
-  color: white;
+body #content #forms #form-content #card-body #form-button:hover {
+  background-color: #1976D2;
+  color: #fff;
 }
 
-#forms #form-content #card-body #form-button img {
+body #content #forms #form-content #card-body #form-button img {
   width: 40px;
 }
 
 #footer {
-  background-color: #fff;
   color: #1976D2;
-  font-size: 11px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  text-align: center !important;
+  padding: 1.5rem !important;
+  background-color: #fff;
+  height: 10px;
+  -webkit-box-shadow: 0 7px 12px 0 rgba(62, 57, 107, 0.16);
+          box-shadow: 0 7px 12px 0 rgba(62, 57, 107, 0.16);
 }
 /*# sourceMappingURL=style.css.map */
