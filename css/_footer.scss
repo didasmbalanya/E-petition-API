@@ -1,9 +1,9 @@
 @import'./variables';
 #footer{
-    background-color: #fff;
-    color: $primary_text_color;
-    font-size: 11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: $mainColor;
+    text-align: center!important;
+    padding: 1.5rem!important;
+    background-color: $background;
+    height: 10px;
+    box-shadow: 0 7px 12px 0 rgba(62,57,107,.16);
 }
