@@ -45,7 +45,7 @@ class UserController {
     if (!checkPass) {
       return res.status(404).json({ status: 404, error: 'incorrect password' });
     }
-    const token = jwtSign(currentUser.email);
+    const token = jwt.sign({ email: currentUser.email }, secret, { expiresIn: '3h' });
     const data = {
       status: 200,
       token,
