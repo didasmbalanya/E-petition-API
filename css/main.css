@@ -17,7 +17,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: #1976D2;
+  background-color: #fff;
   z-index: 9;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -36,19 +36,35 @@
 
 .content {
   min-height: calc(100vh - 8rem);
-  background-color: rgba(241, 236, 236, 0.883);
+  background-color: #f6f4f6;
   display: -ms-grid;
   display: grid;
   -ms-grid-column: 1;
   grid-column: 1fr;
 }
 
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #cccccc;
+}
+
+.card-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .footer {
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  background-color: #1976D2;
-  color: #fff;
+  background-color: #fff;
+  color: #1976D2;
   font-size: 11px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -65,7 +81,25 @@
   background-color: #fff;
   border-radius: 12px;
   margin: 0.4rem;
-  height: 150px;
+  min-height: 15rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
+  padding: 5px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(185, 185, 185, 0.897);
+          box-shadow: 0 2px 2px 0 rgba(185, 185, 185, 0.897);
+}
+
+@media only screen and (min-width: 768px) {
+  .card {
+    width: 60%;
+  }
 }
 
 .humberger-menu {
@@ -75,11 +109,17 @@
           justify-content: center;
   -ms-flex-line-pack: center;
       align-content: center;
-  color: white;
+  color: #1976D2;
+}
+
+@media only screen and (min-width: 768px) {
+  .humberger-menu {
+    visibility: hidden;
+  }
 }
 
 .title {
-  color: #fff;
+  color: #1976D2;
   font-size: 20px;
   margin-left: 1rem;
 }
@@ -88,6 +128,162 @@
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+.header_section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: url("../img/change.jpg");
+  background-size: contain;
+  min-height: 15rem;
+  margin-top: 5px;
+  margin-bottom: 1.5rem;
+}
+
+.main_title {
+  padding: 1rem;
+  color: white;
+  font-size: 2em;
+}
+
+.subhead {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #000;
+  font-weight: bold;
+}
+
+.petition_content {
+  color: #404040;
+  line-height: 1.5;
+  text-align: left;
+  font-weight: lighter;
+  font-size: 12px;
+  padding: 1rem;
+}
+
+.card_actions {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  color: #000;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.btn-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #1976D2;
+}
+
+.upcolor {
+  color: red;
+}
+
+.downcolor {
+  color: grey;
+}
+
+.btn-str-petition {
+  color: white;
+  padding: 0.5rem;
+  width: 45%;
+  background-color: red;
+  border-width: 0;
+  border-radius: 12px;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn-str-petition {
+    width: 20%;
+  }
+}
+
+.card-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .card-content {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+.card-img {
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .card-img {
+    width: 20%;
+    height: 20%;
+  }
+}
+
+.str-petition-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: gray;
+}
+
+.menu-left, .menu-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  visibility: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .menu-left, .menu-right {
+    visibility: visible;
+  }
 }
 
 .m-t-5 {
