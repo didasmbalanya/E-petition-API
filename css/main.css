@@ -122,6 +122,7 @@
   color: #1976D2;
   font-size: 20px;
   margin-left: 1rem;
+  text-decoration: none;
 }
 
 .spacer {
@@ -267,6 +268,7 @@
       -ms-flex-align: center;
           align-items: center;
   color: gray;
+  text-decoration: none;
 }
 
 .menu-left, .menu-right {

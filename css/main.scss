@@ -83,6 +83,7 @@ $breakpoint-tablet: 768px;
     color: $primary_text_color;
     font-size: 20px;
     margin-left: 1rem;
+    text-decoration: none;
 }
 
 .spacer {
@@ -168,7 +169,8 @@ $breakpoint-tablet: 768px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: lighten($color: #000, $amount: 50)
+    color: lighten($color: #000, $amount: 50);
+    text-decoration: none;
 }
 .menu-left, .menu-right {
     display: flex;

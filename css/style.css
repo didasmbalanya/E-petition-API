@@ -1,5 +1,5 @@
 #navbar {
-  background-color: blue;
+  background-color: #fff;
   margin-top: 0px;
   width: 100%;
   margin-bottom: 26px;
@@ -106,12 +106,12 @@
   padding: .5rem 1rem;
   font-size: 1.25rem;
   border-radius: .3rem;
-  color: blue;
+  color: #fff;
   background-color: #fff;
   display: inline-block;
   font-weight: 400;
   text-decoration: none;
-  border: 1px solid blue;
+  border: 1px solid #fff;
   font-family: inherit;
   /* align-content: center; */
   display: -webkit-box;
@@ -128,7 +128,7 @@
 }
 
 #forms #form-content #main-content #main-fields #form-button:hover {
-  background-color: blue;
+  background-color: #fff;
   color: white;
 }
 
@@ -140,12 +140,12 @@
   padding: .5rem 1rem;
   font-size: 1.25rem;
   border-radius: .3rem;
-  color: blue;
+  color: #fff;
   background-color: #fff;
   display: inline-block;
   font-weight: 400;
   text-decoration: none;
-  border: 1px solid blue;
+  border: 1px solid #fff;
   font-family: inherit;
   /* align-content: center; */
   display: -webkit-box;
@@ -162,7 +162,7 @@
 }
 
 #forms #form-content #card-body #form-button:hover {
-  background-color: blue;
+  background-color: #fff;
   color: white;
 }
 
@@ -171,11 +171,17 @@
 }
 
 #footer {
-  color: white;
-  text-align: center !important;
-  padding: 1.5rem !important;
-  /* margin-top: 3rem!important; */
-  background-color: blue;
-  height: 10px;
+  background-color: #fff;
+  color: #1976D2;
+  font-size: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=style.css.map */
