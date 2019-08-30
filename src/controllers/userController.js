@@ -25,6 +25,8 @@ class UserController {
           const newUser = await userService.addUser(req.body);
           const token = jwt.sign({ email: req.body.email }, secret, { expiresIn: '3h' });
           res.status(201).send({ status: 201, data: getPublicProfile(newUser), token });
+        } else {
+          res.status(401).send({ status: 401, error: 'Different enrties in password and confirm password' });
         }
       } catch (error) {
         throw new Error('Unexpected');
