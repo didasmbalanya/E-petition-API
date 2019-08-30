@@ -7,8 +7,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 // variables
-$primary-color:  #1976D2;
+$primary-color:  #fff;
+$primary_text_color: #1976D2;
 $card-bg: #fff;
+$breakpoint-tablet: 768px;
 
 .main-grid {
     display: grid;
@@ -28,15 +30,23 @@ $card-bg: #fff;
 }
 .content{
     min-height: calc(100vh - 8rem);
-    background-color: rgba(241, 236, 236, 0.883);
+    background-color: #f6f4f6;
     display: grid;
     grid-column: 1fr;
 }
+.divider{
+    height: 1px;
+    width: 100%;
+    background-color: lighten($color: #000, $amount: 80);
+}
+.card-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .footer {
-    position: sticky;
-    bottom: 0;
-    background-color: $primary-color;
-    color: #fff;
+    background-color: #fff;
+    color: $primary_text_color;
     font-size: 11px;
     display: flex;
     justify-content: center;
@@ -47,18 +57,30 @@ $card-bg: #fff;
     background-color: $card-bg;
     border-radius: 12px;
     margin: 0.4rem;
-    height: 150px;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 5px;
+    box-shadow: 0 2px 2px 0 rgba(185, 185, 185, 0.897);
+    @media only screen and (min-width: $breakpoint-tablet) {
+        width: 60%;
+    }
 }
 
 .humberger-menu {
     cursor: pointer;
     justify-content: center;
     align-content: center;
-    color: white;
+    color: $primary_text_color;
+    @media only screen and (min-width: $breakpoint-tablet) {
+        visibility: hidden;
+    }
+
 }
 
 .title {
-    color: #fff;
+    color: $primary_text_color;
     font-size: 20px;
     margin-left: 1rem;
 }
@@ -66,7 +88,96 @@ $card-bg: #fff;
 .spacer {
     flex-grow: 1;
 }
-
+.header_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('../img/change.jpg');
+    background-size: contain;
+    min-height: 15rem;
+    margin-top: 5px;
+    margin-bottom: 1.5rem;
+}
+.main_title {
+    padding: 1rem;
+    color: white;
+    font-size: 2em;
+}
+.subhead {
+    display: flex;
+    justify-content: center;
+    color:  #000;
+    font-weight: bold;
+}
+.petition_content {
+    color: lighten($color: #000, $amount: 25);
+    line-height: 1.5;
+    text-align: left;
+    font-weight: lighter;
+    font-size: 12px;
+    padding: 1rem;
+}
+.card_actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #000;
+}
+.clickable {
+    cursor: pointer;
+}
+.btn-card {
+    display:flex;
+    align-items: center;
+    color: $primary_text_color;
+}
+.upcolor {
+    color: red;
+}
+.downcolor {
+    color: grey;
+}
+.btn-str-petition {
+    color: white;
+    padding: 0.5rem;
+    width: 45%;
+    background-color: red;
+    border-width: 0;
+    border-radius: 12px;
+    @media only screen and (min-width: $breakpoint-tablet) {
+        width: 20%;
+    }
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+    @media only screen and (min-width: $breakpoint-tablet) {
+        flex-direction: row;
+    }
+}
+.card-img {
+    width: 100%;
+    @media only screen and (min-width: $breakpoint-tablet) {
+        width: 20%;
+        height: 20%;
+    }
+}
+.str-petition-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: lighten($color: #000, $amount: 50)
+}
+.menu-left, .menu-right {
+    display: flex;
+    flex-direction: row;
+    visibility: hidden;
+    @media only screen and (min-width: $breakpoint-tablet) {
+        visibility: visible;
+    }
+}
 // helpers
 $space_values: (5, 10, 15, 20);
 $sides: (top, bottom, right, left);
